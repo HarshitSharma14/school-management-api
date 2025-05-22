@@ -16,8 +16,8 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-console.log('🚀 Starting School Management API with TiDB Cloud...');
-console.log('📦 Using ES Modules (Modern JavaScript)');
+console.log(' Starting School Management API with TiDB Cloud...');
+console.log(' Using ES Modules (Modern JavaScript)');
 
 // Security middleware
 app.use(helmet());
@@ -63,7 +63,7 @@ app.use((request, response, next) => {
     const method = request.method;
     const url = request.originalUrl;
 
-    console.log(`📝 ${timestamp} - ${method} ${url}`);
+    console.log(` ${timestamp} - ${method} ${url}`);
     next();
 });
 
@@ -72,7 +72,7 @@ app.use((request, response, next) => {
 app.get('/', (request, response) => {
     response.status(200).json({
         success: true,
-        message: 'Welcome to School Management API! 🏫📚',
+        message: 'Welcome to School Management API!',
         version: '1.0.0',
         database: 'TiDB Cloud MySQL',
         endpoints: {
@@ -104,7 +104,7 @@ app.get('/health', async (request, response) => {
 
         response.status(200).json({
             success: true,
-            message: 'School Management API is healthy! ✅',
+            message: 'School Management API is healthy! ',
             timestamp: new Date().toISOString(),
             database: {
                 status: dbConnected ? 'CONNECTED' : 'DISCONNECTED',
@@ -176,12 +176,12 @@ async function startServer() {
 
 // Graceful shutdown
 process.on('SIGTERM', () => {
-    console.log('🛑 Shutting down gracefully...');
+    console.log(' Shutting down gracefully...');
     process.exit(0);
 });
 
 process.on('SIGINT', () => {
-    console.log('🛑 Shutting down gracefully...');
+    console.log(' Shutting down gracefully...');
     process.exit(0);
 });
 

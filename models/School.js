@@ -19,7 +19,7 @@ class School {
             // Execute the query with our data
             const [result] = await pool.execute(insertQuery, [name, address, latitude, longitude]);
 
-            console.log(`✅ New school added to TiDB Cloud: ${name}`);
+            console.log(` New school added to TiDB Cloud: ${name}`);
 
             // Return the newly created school data
             return {
@@ -33,7 +33,7 @@ class School {
             };
 
         } catch (error) {
-            console.error('❌ Error adding school to TiDB Cloud:', error);
+            console.error(' Error adding school to TiDB Cloud:', error);
             throw new Error(`Failed to add school: ${error.message}`);
         }
     }
@@ -54,11 +54,11 @@ class School {
             // Execute the query
             const [schools] = await pool.execute(selectQuery);
 
-            console.log(`📚 Retrieved ${schools.length} schools from TiDB Cloud`);
+            console.log(` Retrieved ${schools.length} schools from TiDB Cloud`);
             return schools;
 
         } catch (error) {
-            console.error('❌ Error fetching schools from TiDB Cloud:', error);
+            console.error(' Error fetching schools from TiDB Cloud:', error);
             throw new Error(`Failed to fetch schools: ${error.message}`);
         }
     }
@@ -80,14 +80,14 @@ class School {
             const [existingSchools] = await pool.execute(checkQuery, [name, latitude, longitude]);
 
             if (existingSchools.length > 0) {
-                console.log(`⚠️  Duplicate school found: ${existingSchools[0].name}`);
+                console.log(`  Duplicate school found: ${existingSchools[0].name}`);
                 return true;
             }
 
             return false;
 
         } catch (error) {
-            console.error('❌ Error checking duplicates in TiDB Cloud:', error);
+            console.error(' Error checking duplicates in TiDB Cloud:', error);
             throw new Error(`Failed to check for duplicates: ${error.message}`);
         }
     }
@@ -108,7 +108,7 @@ class School {
             return schools[0] || null; // Return first school or null if not found
 
         } catch (error) {
-            console.error('❌ Error fetching school by ID from TiDB Cloud:', error);
+            console.error(' Error fetching school by ID from TiDB Cloud:', error);
             throw new Error(`Failed to fetch school: ${error.message}`);
         }
     }
@@ -138,7 +138,7 @@ class School {
             return schools;
 
         } catch (error) {
-            console.error('❌ Error fetching schools within radius:', error);
+            console.error(' Error fetching schools within radius:', error);
             throw new Error(`Failed to fetch schools within radius: ${error.message}`);
         }
     }

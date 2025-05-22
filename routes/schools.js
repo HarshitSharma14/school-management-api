@@ -16,7 +16,7 @@ router.get('/schoolsNearby', SchoolController.getSchoolsNearby);
 router.get('/health', (request, response) => {
     response.status(200).json({
         success: true,
-        message: 'School API routes are working! 🏫',
+        message: 'School API routes are working! ',
         timestamp: new Date().toISOString(),
         version: '1.0.0',
         availableEndpoints: [

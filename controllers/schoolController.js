@@ -9,12 +9,12 @@ class SchoolController {
      */
     static async addSchool(request, response) {
         try {
-            console.log('📝 Processing new school addition...');
+            console.log(' Processing new school addition...');
 
             const { error, value } = addSchoolValidation.validate(request.body);
 
             if (error) {
-                console.log('⚠️  Validation failed:', error.details[0].message);
+                console.log('  Validation failed:', error.details[0].message);
                 return response.status(400).json({
                     success: false,
                     message: 'Please check your input data',
@@ -48,7 +48,7 @@ class SchoolController {
             });
 
         } catch (error) {
-            console.error('❌ Add School Error:', error);
+            console.error(' Add School Error:', error);
             response.status(500).json({
                 success: false,
                 message: 'Something went wrong while adding the school',
@@ -63,7 +63,7 @@ class SchoolController {
      */
     static async listSchools(request, response) {
         try {
-            console.log('📍 Processing school list request...');
+            console.log(' Processing school list request...');
 
             const { error, value } = listSchoolsValidation.validate({
                 latitude: parseFloat(request.query.latitude),
@@ -71,7 +71,7 @@ class SchoolController {
             });
 
             if (error) {
-                console.log('⚠️  Location validation failed:', error.details[0].message);
+                console.log('  Location validation failed:', error.details[0].message);
                 return response.status(400).json({
                     success: false,
                     message: 'Please provide valid latitude and longitude coordinates',
@@ -136,7 +136,7 @@ class SchoolController {
             });
 
         } catch (error) {
-            console.error('❌ List Schools Error:', error);
+            console.error(' List Schools Error:', error);
             response.status(500).json({
                 success: false,
                 message: 'Something went wrong while fetching schools',
@@ -151,8 +151,8 @@ class SchoolController {
      */
     static async getSchoolsNearby(request, response) {
         try {
-            console.log('🔍 Processing nearby schools request...');
-            console.log('📍 Query parameters:', request.query);
+            console.log(' Processing nearby schools request...');
+            console.log(' Query parameters:', request.query);
 
             const { latitude, longitude, radius = 50 } = request.query;
 
@@ -200,7 +200,7 @@ class SchoolController {
                 });
             }
 
-            console.log(`📍 Searching within ${radiusKm}km of (${userLat}, ${userLon})`);
+            console.log(` Searching within ${radiusKm}km of (${userLat}, ${userLon})`);
 
             const allSchools = await School.getAllSchools();
 
@@ -244,7 +244,7 @@ class SchoolController {
 
             nearbySchools.sort((a, b) => a.distance - b.distance);
 
-            console.log(`✅ Found ${nearbySchools.length} schools within ${radiusKm}km`);
+            console.log(` Found ${nearbySchools.length} schools within ${radiusKm}km`);
 
             response.status(200).json({
                 success: true,
@@ -268,7 +268,7 @@ class SchoolController {
             });
 
         } catch (error) {
-            console.error('❌ Nearby Schools Error:', error);
+            console.error(' Nearby Schools Error:', error);
             response.status(500).json({
                 success: false,
                 message: 'Something went wrong while searching for nearby schools',

@@ -24,12 +24,12 @@ const connectionPool = mysql.createPool(databaseConfig);
 
 async function testDatabaseConnection() {
     try {
-        console.log('🔄 Connecting to TiDB Cloud...');
+        console.log(' Connecting to TiDB Cloud...');
         const connection = await connectionPool.getConnection();
 
         // Test basic connection first
         const [basicTest] = await connection.execute('SELECT 1 as test');
-        console.log('✅ Basic connection successful');
+        console.log(' Basic connection successful');
 
         // Test if database exists
         const [databases] = await connection.execute('SHOW DATABASES');
@@ -53,41 +53,41 @@ async function testDatabaseConnection() {
 
             if (!tableExists) {
                 console.log('⚠️  Schools table does not exist. Please create it manually in TiDB Console.');
-                console.log('💡 Go to TiDB Cloud Console and run the table creation SQL');
+                console.log(' Go to TiDB Cloud Console and run the table creation SQL');
                 connection.release();
                 return false;
             }
 
             // Test if table has data
             const [count] = await connection.execute('SELECT COUNT(*) as count FROM schools');
-            console.log(`📚 Found ${count[0].count} schools in database`);
+            console.log(` Found ${count[0].count} schools in database`);
 
         } catch (tableError) {
-            console.log('⚠️  Schools table does not exist or is inaccessible');
-            console.log('💡 Please create the schools table in TiDB Cloud Console');
+            console.log('  Schools table does not exist or is inaccessible');
+            console.log(' Please create the schools table in TiDB Cloud Console');
             connection.release();
             return false;
         }
 
-        console.log('✅ Successfully connected to TiDB Cloud!');
-        console.log(`📊 Database: ${process.env.DB_NAME}`);
-        console.log(`🌐 Host: ${process.env.DB_HOST}`);
+        console.log(' Successfully connected to TiDB Cloud!');
+        console.log(` Database: ${process.env.DB_NAME}`);
+        console.log(` Host: ${process.env.DB_HOST}`);
 
         connection.release();
         return true;
 
     } catch (error) {
-        console.error('❌ TiDB Cloud connection failed:', error.message);
+        console.error(' TiDB Cloud connection failed:', error.message);
 
         if (error.code === 'ER_ACCESS_DENIED_ERROR') {
-            console.error('🔑 Access denied. Check your username and password in .env file');
+            console.error(' Access denied. Check your username and password in .env file');
         } else if (error.code === 'ENOTFOUND') {
-            console.error('🌐 Host not found. Check your DB_HOST in .env file');
+            console.error(' Host not found. Check your DB_HOST in .env file');
         } else if (error.code === 'ECONNREFUSED') {
-            console.error('🚫 Connection refused. Check your DB_HOST and DB_PORT in .env file');
+            console.error(' Connection refused. Check your DB_HOST and DB_PORT in .env file');
         }
 
-        console.error('💡 Troubleshooting steps:');
+        console.error(' Troubleshooting steps:');
         console.error('   1. Check your .env file has correct TiDB Cloud credentials');
         console.error('   2. Verify your TiDB Cloud cluster is running');
         console.error('   3. Create the schools table using TiDB Cloud Console');

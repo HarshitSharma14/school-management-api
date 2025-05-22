@@ -3,9 +3,9 @@
  * This catches any errors that slip through our controllers
  */
 function errorHandler(error, request, response, next) {
-    console.error('🚨 Global Error Handler Triggered:', error);
-    console.error('📍 Error occurred at:', request.originalUrl);
-    console.error('⏰ Timestamp:', new Date().toISOString());
+    console.error(' Global Error Handler Triggered:', error);
+    console.error(' Error occurred at:', request.originalUrl);
+    console.error(' Timestamp:', new Date().toISOString());
 
     // Default error response
     let errorResponse = {
